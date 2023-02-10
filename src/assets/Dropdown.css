@@ -1,0 +1,75 @@
+#dropdown {
+    min-width: 200px;
+    background-color: #201f1f;
+    position: absolute;
+    margin-top: 30px;
+    text-align: center;
+    box-shadow: 0 14px 35px 0 rgba(9, 9, 12, 0.4);
+    left: -60px;
+    border-radius: 20px 0 20px 0;
+    cursor: pointer;
+}
+
+#dropdown .box {
+    height: 50px;
+}
+
+#dropdown .param:hover {
+    background-color: #116530;
+    border-radius: 20px 0 0 0;
+    z-index: 8789998498;
+}
+
+#dropdown .out:hover {
+    background-color: #8D1E00;
+    border-radius: 0 0 20px 0;
+    z-index: 8789998498;
+}
+
+#dropdown .box .txt {
+    position: relative;
+    top: 15%;
+
+}
+
+
+/* //////////////////////////////////////////////////////////////////////////////////////////////////////// */
+
+
+#menuDropdown {
+    min-width: 150px;
+    background-color: #201f1f;
+    position: absolute;
+    z-index: 8789998498;
+    margin-top: 20px;
+    text-align: center;
+    box-shadow: 0 14px 35px 0 rgba(9, 9, 12, 0.4);
+    border-radius: 0 20px 0 20px;
+    cursor: pointer;
+    margin-left: 10px;
+    color: #8a8a8a
+}
+
+#menuDropdown .box {
+    height: 50px;
+}
+
+#menuDropdown .param:hover {
+    background-color: #116530;
+    border-radius: 0 20px 0 0;
+}
+
+#menuDropdown .stuff:hover {
+    background-color: #8D1E00;
+}
+
+#menuDropdown .browse:hover {
+    background-color: #8D1E00;
+    border-radius: 0 0 0 20px;
+}
+
+#menuDropdown .box .txt {
+    position: relative;
+    top: 15%;
+
+}
