@@ -24,7 +24,7 @@ export default function Home() {
 
 
 
-    // dataFetchedRef.current = true;
+    dataFetchedRef.current = true;
   }, []);
   return (
     <>
@@ -52,7 +52,7 @@ export default function Home() {
           }}>
             MOVIES
           </h1>
-          <Sliders posters={trendingMovies} setPosters={setTrendingMovies} />
+          <Sliders posters={trendingMovies} setPosters={setTrendingMovies} user={user} setUser={setUser} />
           <h1 style={{
             position: 'absolute',
             transform: 'rotate(-90deg)',
@@ -63,7 +63,7 @@ export default function Home() {
             Series
           </h1>
 
-          <Sliders posters={trendingSeries} setPosters={setTrendingSeries} />
+          <Sliders posters={trendingSeries} setPosters={setTrendingSeries} user={user} setUser={setUser} />
 
         </Layout>
       </main>

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { rightPagination, leftPagination } from "../functions/MDB"
-import Link from 'next/link'
+import Router from 'next/router';
 import Image from 'next/image'
-export default function Movies({ posters, setPosters }) {
+export default function Movies({ posters, setPosters, user, setUser }) {
   const [imgHover, setImgHover] = useState(null)
   const [leftHover, setLeftHover] = useState(false)
   const [rightHover, setRightHover] = useState(false)
+
   return (
     <div id="trendingSliders">
       {posters.moved ?
@@ -21,7 +22,12 @@ export default function Movies({ posters, setPosters }) {
         const posterSrc = "https://image.tmdb.org/t/p/original" + e.poster_path
 
         return (
-          <Link
+          <div onClick={() => {
+            Router.push({
+              pathname: `/${posters.type.slice(0, posters.type.length - 1)}/${posters.data[i].id}`,
+              query: { user: JSON.stringify(user), setUser: JSON.stringify(setUser) },
+            });
+          }}
             className='posters'
             href={`/movie/` + posters.data[i].id}
             key={i}
@@ -54,7 +60,7 @@ export default function Movies({ posters, setPosters }) {
                 </div>
               </div> : null}
 
-          </Link>
+          </div>
         )
       })}
       < div className="pagination"

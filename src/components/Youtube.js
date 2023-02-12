@@ -8,7 +8,7 @@ export default function Youtube({ subject }) {
     },)
 
     return (
-        <div id='youtube' style={{ top: `-${ytCamouflagePosition + 16}vh`, }}>
+        <div id='youtube' style={{ top: `-${ytCamouflagePosition + 16}vh` }}>
             {/* <iframe id="ytVid"
                 src={`https://www.youtube.com/embed/${yt}?rel=0?version=3&autoplay=1&controls=0&&showinfo=0&loop=1&mute=1&playlist=${yt}`}
                 frameborder="0" /> */}
