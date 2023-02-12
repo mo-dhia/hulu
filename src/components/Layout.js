@@ -50,6 +50,7 @@ export default function Layout({ children, setUser, user }) {
                   setDropdown(!dropdown)
                   setLoginModal(false)
                   setError(null)
+
                 } else {
                   setLoginModal(!loginModal)
                   setError(null)
@@ -65,16 +66,16 @@ export default function Layout({ children, setUser, user }) {
         </div>
 
 
-        {loginModal ? <LoginModal
-          setModal={setLoginModal}
-          error={error} setError={setError}
-          setUser={setUser} /> : null}
 
 
         {editModal ? <EditModal
           setModal={setEditModal}
           error={error} setError={setError}
           user={user} setUser={setUser} /> : null}
+        {loginModal ? <LoginModal
+          setModal={setLoginModal}
+          error={error} setError={setError}
+          setUser={setUser} /> : null}
 
 
 

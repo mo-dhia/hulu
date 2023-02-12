@@ -1,0 +1,62 @@
+#youtube {
+    font-family: 'Righteous', cursive;
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    z-index: -555555555555555555555555555555555555;
+
+}
+
+#youtube #subject {
+    width: 30%;
+    margin-left: 40px;
+    margin-top: 150px;
+    font-family: 'Righteous', cursive;
+
+}
+
+#youtube #title {
+    color: white;
+    font-size: 80px;
+    width: 40vw;
+    position: relative;
+    top: 200px;
+    text-shadow: 2px 2px 2px #201f1f;
+}
+
+#youtube #overview {
+    color: white;
+    margin-top: 220px;
+    font-size: 30px;
+    position: relative;
+
+}
+
+#youtube #ytVid {
+    position: absolute;
+    width: 100vw;
+    right: 0;
+    height: 108%;
+    top: -70px;
+    z-index: -555555555;
+}
+
+#youtube #camouflage {
+    box-shadow: 0px 200px 20px 0px #201f1f inset;
+    height: 252px;
+    position: absolute;
+    width: 100vw;
+    left: 0;
+    z-index: -5;
+    transform: rotate(180deg);
+
+}
+
+#youtube #subject-shadow {
+    height: 90vh;
+    width: 50vw;
+    background: linear-gradient(to left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 90));
+    top: 0;
+    position: absolute;
+    z-index: -50;
+}

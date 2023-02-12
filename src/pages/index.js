@@ -1,14 +1,18 @@
 import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
 import Layout from '@/components/Layout'
+import Youtube from '@/components/Youtube'
+import Sliders from "@/components/Sliders"
 import { useEffect, useState, useRef } from 'react'
-import { getTrendings, rightPagination } from "../functions/MDB"
+import { getTrendings, rightPagination, leftPagination } from "../functions/MDB"
 import Image from 'next/image'
+
 export default function Home() {
   const dataFetchedRef = useRef(false);
   const [user, setUser] = useState(null);;
   const [trendingMovies, setTrendingMovies] = useState({ slice: 0, data: [] })
   const [trendingSeries, setTrendingSeries] = useState({ slice: 0, data: [] })
+  const [ytSubject, setYtSubject] = useState({ title: "", overview: "" })
   useEffect(() => {
     if (dataFetchedRef.current) return;
     const user = JSON.parse(localStorage.getItem('user'))
@@ -16,7 +20,7 @@ export default function Home() {
       setUser(user)
     }
 
-    getTrendings(setTrendingMovies, setTrendingSeries)
+    getTrendings(setTrendingMovies, setTrendingSeries, setYtSubject)
 
 
 
@@ -33,17 +37,33 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <Layout user={user} setUser={setUser}>
-          <div style={{ height: "100vh" }}>
-            <button onClick={() => rightPagination()} style={{ fontSize: "40px", background: "black" }}>{"<"}</button>
-            <button onClick={() => rightPagination(trendingMovies, setTrendingMovies)} style={{ fontSize: "40px", background: "black" }}>{">"}</button>
-            {trendingMovies.slice}
-            {trendingMovies.data.map(e => <Image
-              src={"https://image.tmdb.org/t/p/original" + e.poster_path}
-              alt="Picture of the author"
-              width={100}
-              height={200}
-            />)}
-          </div>
+          <Youtube subject={ytSubject} />
+          <h1 style={{
+            color: "hsl(158deg 99% 46%)", marginLeft: "15px",
+            textShadow: " 4px 4px 3px rgba(0,0,0,0.6)", marginTop: "-420px"
+          }}>
+            Trending Now
+          </h1>
+          <h1 style={{
+            position: 'absolute',
+            transform: 'rotate(-90deg)',
+            top: 980,
+            color: 'hsl(158, 99%, 46%)'
+          }}>
+            MOVIES
+          </h1>
+          <Sliders posters={trendingMovies} setPosters={setTrendingMovies} />
+          <h1 style={{
+            position: 'absolute',
+            transform: 'rotate(-90deg)',
+            top: 1390,
+            left: 15,
+            color: 'hsl(158, 99%, 46%)'
+          }}>
+            Series
+          </h1>
+
+          <Sliders posters={trendingSeries} setPosters={setTrendingSeries} />
 
         </Layout>
       </main>
