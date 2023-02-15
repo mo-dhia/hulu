@@ -4,6 +4,8 @@
     align-items: center;
     background-color: #201f1f;
     height: 100px;
+    position: relative;
+    z-index: 6;
 }
 
 .layout li {

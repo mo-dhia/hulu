@@ -5,8 +5,7 @@ import EditModal from './Modals/EditModal'
 import UserDropdown from './Dropdowns/UserDropdown'
 import MenuDropdown from './Dropdowns/MenuDropdown'
 
-export default function Layout({ children, setUser, user }) {
-  const [loginModal, setLoginModal] = useState(false)
+export default function Layout({ children, setUser, user,loginModal, setLoginModal }) {
   const [editModal, setEditModal] = useState(false)
   const [menuModal, setMenuModal] = useState(false)
   const [dropdown, setDropdown] = useState(false)

@@ -5,14 +5,17 @@ import Youtube from '@/components/Youtube'
 import Sliders from "@/components/Sliders"
 import { useEffect, useState, useRef } from 'react'
 import { getTrendings, rightPagination, leftPagination } from "../functions/MDB"
+import { getTrailer } from '@/functions/youtube'
 import Image from 'next/image'
 
 export default function Home() {
   const dataFetchedRef = useRef(false);
+  const [loginModal, setLoginModal] = useState(false)
   const [user, setUser] = useState(null);;
   const [trendingMovies, setTrendingMovies] = useState({ slice: 0, data: [] })
   const [trendingSeries, setTrendingSeries] = useState({ slice: 0, data: [] })
   const [ytSubject, setYtSubject] = useState({ title: "", overview: "" })
+
   useEffect(() => {
     if (dataFetchedRef.current) return;
     const user = JSON.parse(localStorage.getItem('user'))
@@ -21,10 +24,7 @@ export default function Home() {
     }
 
     getTrendings(setTrendingMovies, setTrendingSeries, setYtSubject)
-
-
-
-    dataFetchedRef.current = true;
+    // dataFetchedRef.current = true;
   }, []);
   return (
     <>
@@ -36,7 +36,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <Layout user={user} setUser={setUser}>
+        <Layout loginModal={loginModal} setLoginModal={setLoginModal} user={user} setUser={setUser}>
           <Youtube subject={ytSubject} />
           <h1 style={{
             color: "hsl(158deg 99% 46%)", marginLeft: "15px",

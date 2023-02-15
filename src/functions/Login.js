@@ -163,6 +163,7 @@ export const update = (user, googleUser, name, setUser, password, passwordChecke
                         user.name = name;
                         user.password = password
                         setUser(user);
+                        localStorage.setItem('user', JSON.stringify(user));
                         setModal(false)
                     })
                 }
@@ -174,6 +175,7 @@ export const update = (user, googleUser, name, setUser, password, passwordChecke
                 }).then(() => {
                     user.name = name;
                     setUser(user);
+                    localStorage.setItem('user', JSON.stringify(user));
                     setModal(false)
                 })
             }
@@ -185,3 +187,68 @@ export const update = (user, googleUser, name, setUser, password, passwordChecke
 }
 
 
+//details page
+
+
+export const handleLibrary = (window, media, user, setUser, library, setLibrary, setModal) => {
+    if (user) {
+        const lib = library === "Add to Library" ? "planned" : library === "Planned" ? "watched" : "x"
+        if (lib !== "x") {
+            let item = {
+                name: media.original_title,
+                imgUrl: "https://image.tmdb.org/t/p/original" + media.poster_path,
+                overview: media.overview,
+                genres: media.genres,
+                rating: media.vote_average
+            }
+            let body = {
+                type: window.location.pathname.slice(1, 6),
+                item: item,
+                id: media.id
+            }
+
+            let updatedDoc = {}
+            if (lib === "watched") {
+                let planned = user.planned.filter(p => p.id !== media.id)
+                user.planned = planned
+                updatedDoc.planned = planned
+            }
+            user[lib].push(body)
+            updatedDoc[lib] = user[lib]
+
+            console.log(updatedDoc)
+
+            setLibrary(library === "Add to Library" ? "Planned" : "Watched")
+            const docRef = doc(db, "users", user.id)
+
+            updateDoc(docRef, updatedDoc).then(() => {
+                setUser(user);
+                localStorage.setItem('user', JSON.stringify(user));
+            })
+        }
+    } else { setModal(true) }
+}
+
+
+export const getMediaFromLibrary = (window, local, library, setLibrary) => {
+    if (local) {
+        const id = window.location.pathname.slice(7)
+        for (let i = 0; local.planned.length > i; i++) {
+            if (local.planned[i].id == id) {
+                setLibrary("Planned");
+                break;
+            }
+        }
+        if (library === "Add to Library") {
+            for (let i = 0; local.watched.length > i; i++) {
+                if (local.watched[i].id == id) {
+                    setLibrary("Watched");
+                    break;
+                }
+            }
+        }
+    }
+    else {
+        setLibrary("Add to Library")
+    }
+}
