@@ -4,8 +4,8 @@ import Layout from '@/components/Layout'
 import Youtube from '@/components/Youtube'
 import Sliders from "@/components/Sliders"
 import { useEffect, useState, useRef } from 'react'
-import { getTrendings, rightPagination, leftPagination } from "../functions/MDB"
-import { getTrailer } from '@/functions/youtube'
+import { getTrendings } from "../functions/MDB"
+import { hideYtBorderAlgo } from '@/functions/youtube'
 import Image from 'next/image'
 
 export default function Home() {
@@ -15,17 +15,36 @@ export default function Home() {
   const [trendingMovies, setTrendingMovies] = useState({ slice: 0, data: [] })
   const [trendingSeries, setTrendingSeries] = useState({ slice: 0, data: [] })
   const [ytSubject, setYtSubject] = useState({ title: "", overview: "" })
-
+  const [ytCamouflagePosition, setYtCamouflagePosition] = useState(0)
+  const [blabla, setBlabla] = useState(0)
   useEffect(() => {
     if (dataFetchedRef.current) return;
+    hideYtBorderAlgo(setYtCamouflagePosition, window.innerWidth);
     const user = JSON.parse(localStorage.getItem('user'))
     if (user) {
       setUser(user)
     }
-
+    zz(window.innerWidth)
     getTrendings(setTrendingMovies, setTrendingSeries, setYtSubject)
     // dataFetchedRef.current = true;
   }, []);
+  function zz(y) {
+    const point1 = { x: -43.88, y: 1366 };
+    const point2 = { x: -21.28, y: 1879 };
+
+    // Calculate the slope
+    const slope = (point2.y - point1.y) / (point2.x - point1.x);
+
+    // Calculate the y-intercept
+    const yIntercept = point1.y - slope * point1.x;
+
+    // Define a function to find x given y
+
+    const x = (y - yIntercept) / slope;
+    console.log(y, x)
+    setBlabla(x)
+  }
+
   return (
     <>
 
@@ -37,13 +56,15 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <Layout loginModal={loginModal} setLoginModal={setLoginModal} user={user} setUser={setUser}>
-          <Youtube subject={ytSubject} />
+          <Youtube subject={ytSubject} ytCamouflagePosition={ytCamouflagePosition} />
           <h1 style={{
             color: "hsl(158deg 99% 46%)", marginLeft: "15px",
-            textShadow: " 4px 4px 3px rgba(0,0,0,0.6)", marginTop: "-420px"
+            textShadow: " 4px 4px 3px rgba(0,0,0,0.6)", marginTop: `${blabla - 16.5}vh`
           }}>
             Trending Now
           </h1>
+          {/* 1350-- -45 30  ++ */}
+
           <h1 style={{
             position: 'absolute',
             transform: 'rotate(-90deg)',
@@ -52,7 +73,8 @@ export default function Home() {
           }}>
             MOVIES
           </h1>
-          <Sliders posters={trendingMovies} setPosters={setTrendingMovies} user={user} setUser={setUser} />
+
+          <Sliders type={"movie"} posters={trendingMovies} setPosters={setTrendingMovies} user={user} setUser={setUser} />
           <h1 style={{
             position: 'absolute',
             transform: 'rotate(-90deg)',
@@ -63,7 +85,7 @@ export default function Home() {
             Series
           </h1>
 
-          <Sliders posters={trendingSeries} setPosters={setTrendingSeries} user={user} setUser={setUser} />
+          <Sliders type={"serie"} posters={trendingSeries} setPosters={setTrendingSeries} user={user} setUser={setUser} />
 
         </Layout>
       </main>

@@ -23,6 +23,7 @@ export const getTrendings = (setMovies, setSeries, setSubject) => {
     const random = Math.floor(Math.random() * 8)
     let subject = [...r[0].data.results.slice(0, 4), ...r[1].data.results.slice(0, 4)][random]
     subject.type = random > 3 ? "tv" : "movie"
+    console.log(r[1].data.results[0])
 
     getTrailer(null, null, subject.name || subject.title, subject, setSubject)
     data.movies = r[0].data.results
@@ -37,7 +38,7 @@ export const getById = (window, planned, watched, setLibrary, setMedia) => {
   const type = window.location.pathname.slice(1, 6)
   const id = window.location.pathname.slice(7)
 
-  axios.get(`https://api.themoviedb.org/3/${type}/${id}?api_key=48586718f1619baec6911ced95941d83&language=en-US`)
+  axios.get(`https://api.themoviedb.org/3/${type === "serie" ? "tv" : type}/${id}?api_key=48586718f1619baec6911ced95941d83&language=en-US`)
     .then(r => {
       setMedia(r.data)
       if (planned || watched) {

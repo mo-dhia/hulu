@@ -3,15 +3,18 @@
     position: relative;
     height: 100vh;
     width: 100vw;
-    z-index: -5
+    z-index: -5;
+    margin-top: 150px;
+
 }
 
 #youtube #subject {
     width: 30%;
     margin-left: 40px;
-    margin-top: 150px;
     font-family: 'Righteous', cursive;
     font-family: Righteous,cursive;
+    position: absolute;
+    bottom:300px
 }
 
 #youtube #title {
@@ -50,6 +53,14 @@
     transform: rotate(180deg);
 
 }
+#youtube .camouflage {
+    background-color: #201f1f;
+    width: 100vw;
+    height: 50vh;
+    position: absolute;
+    top: 87vh;
+    z-index: -40;        
+}
 
 #youtube #subject-shadow {
     height: 90vh;
@@ -59,3 +70,28 @@
     position: absolute;
     z-index: -50;
 }
+
+
+@media (max-width: 1370px) {
+    #youtube #subject{
+        width: 40%;
+    }
+    #youtube #title {
+        font-size:50px;
+    }
+    #youtube #overview {
+        font-size:28px;
+    }
+  }
+  @media (max-width: 1370px) {
+    #youtube .camouflage {
+        top: 85vh;
+    }
+    #youtube #overview {
+        font-size:24px;
+    }
+    #youtube #subject{
+        bottom: auto;
+        top: 10vh
+    }
+  }

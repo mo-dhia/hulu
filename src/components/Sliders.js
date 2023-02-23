@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { rightPagination, leftPagination } from "../functions/MDB"
 import Link from 'next/link';
-export default function Movies({ posters, setPosters, user, setUser }) {
+export default function Movies({ posters, setPosters, type }) {
   const [imgHover, setImgHover] = useState(null)
   const [leftHover, setLeftHover] = useState(false)
   const [rightHover, setRightHover] = useState(false)
@@ -22,7 +22,7 @@ export default function Movies({ posters, setPosters, user, setUser }) {
 
         return (
           <Link className='posters'
-            href={`/movie/` + posters.data[i].id}
+            href={`/${type}/` + posters.data[i].id}
             key={i}
             onMouseEnter={() => { setImgHover(i) }}
             onMouseLeave={() => { setImgHover(null) }}
